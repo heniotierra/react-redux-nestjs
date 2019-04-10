@@ -1,0 +1,10 @@
+{
+  "type": "postgresql",
+  "host": "localhost",
+  "port": 5432,
+  "username": "linx",
+  "password": "linx",
+  "database": "linx_antecipacao",
+  "entities": ["src/**/*.entity{.ts,.js}"],
+  "synchronize": true
+}
