@@ -25,8 +25,6 @@ import { Connection } from 'typeorm';
       "synchronize": true
     })
   ],
-  controllers: [AppController, PersonsController, TodosController],
-  providers: [AppService, PersonsService, TodosService],
 })
 
 export class AppModule {
