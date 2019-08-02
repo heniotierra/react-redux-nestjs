@@ -1,34 +1,22 @@
-import { apiBase } from './constants';
+import { 
+  apiBase,
+} from './constants';
+import axios from 'axios';
 
-export const get = async (resource, config) => {
-  try{
-    const url = `${apiBase}/${resource}`;
-    const response = await fetch(url, config);
-    if (!response.ok) return false;
-    const json = await response.json();
-    return json;
-  }catch(e){
-    console.log(e);
-    return false;
-  }
+export const get = (resource, config) => {
+  const url = `${apiBase}/${resource}`;
+  return axios({
+    method: 'GET',
+    config,
+    url,
+  });
 }
 
-export const post = async (resource, data) => {
-  try{
-    const url = `${apiBase}/${resource}`;
-    const response = await fetch(url, {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data),
-    });
-    if (!response.ok) return false;
-    const json = await response.json();
-    return json;
-  }catch(e){
-    console.log(e);
-    return false;
-  }
+export const post = (resource, data) => {
+  const url = `${apiBase}/${resource}`;
+  return axios({
+    method: 'POST',
+    data,
+    url,
+  });
 }

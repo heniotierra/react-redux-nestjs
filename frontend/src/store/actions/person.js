@@ -1,6 +1,9 @@
-import { post, get } from '../apiComm';
-
-const apiResourse = 'persons';
+export const addPerson = (person) => {
+  return {
+    type: 'ADD_PERSON',
+    person,
+  }
+}
 
 export const addingPerson = () => {
   return {
@@ -27,6 +30,12 @@ export const closeAlert = () => {
   }
 }
 
+export const getPersons = () => {
+  return {
+    type: 'GET_PERSONS'
+  }
+}
+
 export const gettingPersons = () => {
   return {
     type: 'GETTING_PERSONS'
@@ -44,22 +53,4 @@ export const noGotPersons = () => {
   return {
     type: 'NO_GOT_PERSONS'
   }
-}
-
-export const getPersons = () => async (dispatch) => {
-  dispatch(gettingPersons());
-  const persons = await get(apiResourse);
-  if (persons) 
-    dispatch(gotPersons(persons));
-  else 
-    dispatch(noGotPersons());
-}
-
-export const addPerson = (newPerson) => async (dispatch) => {
-  dispatch(addingPerson());
-  const person = await post(apiResourse, newPerson);
-  if (person) 
-    dispatch(addedPerson(person));
-  else 
-    dispatch(noAddedPerson());
 }

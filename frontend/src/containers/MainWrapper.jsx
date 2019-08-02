@@ -20,7 +20,7 @@ const styles = theme => ({
   },
 });
 
-class MainWrapper extends React.Component {
+class MainWrapper extends React.PureComponent {
   render(){
     const { classes } = this.props;
     return (

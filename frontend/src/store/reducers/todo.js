@@ -17,23 +17,23 @@ const initialState = {
               });
           case 'ADDING_TODO':
               return Object.assign({}, state, {
-                  isLoading: true
+                isLoading: true
               });
           case 'NO_ADDED_TODO':
               return Object.assign({}, state, {
-                  isLoading: false,
-                  failAlertOpen: true
+                isLoading: false,
+                failAlertOpen: true
               });
           case 'ADDED_TODO':
               return Object.assign({}, state, {
-                  isLoading: false,
-                  successAlertOpen: true,
-                  todos: [...state.todos, action.todo]
+                isLoading: false,
+                successAlertOpen: true,
+                todos: [...state.todos, action.todo]
               });
           case 'CLOSE_ALERT':
               return Object.assign({}, state, {
-                  successAlertOpen: false,
-                  failAlertOpen: false
+                successAlertOpen: false,
+                failAlertOpen: false
               });
           default:
               return state;

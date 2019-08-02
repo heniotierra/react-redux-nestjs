@@ -9,7 +9,7 @@ import Todos from './pages/Todos';
 import store from './store/store';
 import { Provider } from 'react-redux';
 
-class App extends React.Component {
+class App extends React.PureComponent {
 
   render(){
     return (

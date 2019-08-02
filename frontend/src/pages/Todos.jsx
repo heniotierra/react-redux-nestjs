@@ -14,7 +14,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
-import * as todoActions from '../actions/todo';
+import * as todoActions from '../store/actions/todo';
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(todoActions, dispatch);
 
@@ -48,7 +48,7 @@ class Todo {
   startDate = '';
 }
 
-class Todos extends React.Component {
+class Todos extends React.PureComponent {
 
   state = {
     newTodo: new Todo()
@@ -60,11 +60,10 @@ class Todos extends React.Component {
     this.closeAlert = this.closeAlert.bind(this);
   }
 
-  addTodo(e){
+  addTodo(){
     const personId = parseInt(this.props.match.params.id);
     const assignee = this.props.persons.filter((person) => parseInt(person.id)===personId)[0];
     this.props.addTodo(this.state.newTodo, assignee);
-    e.preventDefault();
   }
 
   closeAlert(){
@@ -88,7 +87,7 @@ class Todos extends React.Component {
           justify="center">
           <Grid container 
             justify="center">
-            <form onSubmit={(e) => this.addTodo(e)}>
+            <form>
               <TextField
                 label={t("name")}
                 id="margin-none"
@@ -120,7 +119,12 @@ class Todos extends React.Component {
                 type="date"
                 color="primary" />
               &nbsp;
-              <Button variant="contained" color="primary" className={classes.button} type="submit" disabled={this.props.isLoading}>
+              <Button 
+                variant="contained" 
+                color="primary" 
+                className={classes.button} 
+                disabled={this.props.isLoading}
+                onClick={() => this.addTodo()}>
                 {t("add-todo")}
               </Button>
             </form>
@@ -164,4 +168,13 @@ Todos.propTypes = {
   classes: PropTypes.object
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withTranslation()(withStyles(styles)(Todos)))); 
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(
+    withTranslation()(
+      withStyles(styles)(Todos)
+    )
+  )
+);

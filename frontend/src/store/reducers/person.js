@@ -2,7 +2,7 @@ const initialState = {
   persons: [],
   isLoading: false,
   successAlertOpen: false,
-  failAlertOpen: false
+  failAlertOpen: false,
 };
   
 const person = (state = initialState, action) => {

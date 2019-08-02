@@ -19,6 +19,7 @@ export class PersonsController {
 
     @Post()
     create(@Body() person: Person) {
+        console.log("person",person);
         return this.personsService.create(person);
     }
 

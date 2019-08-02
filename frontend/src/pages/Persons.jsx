@@ -13,7 +13,7 @@ import AlertDialog from '../commons/AlertDialog';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as personActions from '../actions/person';
+import * as personActions from '../store/actions/person';
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(personActions, dispatch);
 
@@ -41,7 +41,7 @@ export class Person {
   name = '';
 }
 
-class Persons extends React.Component {
+class Persons extends React.PureComponent {
 
   state = {
     newPerson: new Person()
@@ -54,9 +54,8 @@ class Persons extends React.Component {
     this.gotoTodos = this.gotoTodos.bind(this);
   }
 
-  addPerson(e){
+  addPerson(){
     this.props.addPerson(this.state.newPerson);
-    e.preventDefault();
   }
 
   closeAlert(){
@@ -85,7 +84,7 @@ class Persons extends React.Component {
           <Grid container 
             justify="center"
             className={classes.inputGrid}>
-            <form onSubmit={(e) => this.addPerson(e)}>
+            <form>
               <TextField
                 label={t("name")}
                 id="person-name"
@@ -97,7 +96,12 @@ class Persons extends React.Component {
                 color="primary" 
                 required />
               &nbsp;
-              <Button variant="contained" color="primary" className={classes.button} type="submit" disabled={this.props.isLoading}>
+              <Button 
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                disabled={this.props.isLoading}
+                onClick={() => this.addPerson()}>
                 {t("add-person")}
               </Button>
             </form>
@@ -139,4 +143,11 @@ Persons.propTypes = {
   classes: PropTypes.object
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(withStyles(styles)(Persons)));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(
+  withTranslation()(
+    withStyles(styles)(Persons)
+  )
+);
